@@ -21,9 +21,9 @@ const SignUp = () => {
   const [areas, setAreas] = useState([]);
   const [selectedArea, setSelectedArea] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-
+  console.log(selectedArea);
   useEffect(() => {
-    fetch("https://restcountries.eu/rest/v2/all")
+    fetch("https://restcountries.com/v2/all")
       .then((response) => response.json())
       .then((data) => {
         let areaData = data.map((item) => {
@@ -31,14 +31,14 @@ const SignUp = () => {
             code: item.alpha2Code,
             name: item.name,
             callingCode: `+${item.callingCodes[0]}`,
-            flag: `https://www.countryflags.io/${item.alpha2Code}/flat/64.png`,
+            flag: item.flags.png,
           };
         });
 
         setAreas(areaData);
 
         if (areaData.length > 0) {
-          let defaultData = areaData.filter((a) => a.code == "US");
+          let defaultData = areaData.filter((a) => a.code === "US");
 
           if (defaultData.length > 0) {
             setSelectedArea(defaultData[0]);
@@ -140,7 +140,7 @@ const SignUp = () => {
                 borderColor: "transparent",
                 flexDirection: "row",
               }}
-              onPress={() => console.log("show modal")}
+              onPress={() => setModalVisible(true)}
             >
               <View style={{ justifyContent: "center" }}>
                 <Image
@@ -150,14 +150,15 @@ const SignUp = () => {
               </View>
               <View style={{ justifyContent: "center", marginLeft: 5 }}>
                 <Image
-                  source={images.usFlag}
+                  source={{ uri: selectedArea?.flag }}
                   style={{ width: 30, height: 30 }}
                   resizeMode="contain"
                 />
               </View>
               <View style={{ justifyContent: "center", marginLeft: 5 }}>
                 <Text style={{ color: COLORS.white, ...FONTS.body3 }}>
-                  US+1
+                  {selectedArea?.code}
+                  {selectedArea?.callingCode}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -243,6 +244,62 @@ const SignUp = () => {
     );
   }
 
+  function renderModal() {
+
+    const renderItem = ({ item }) => {
+      return (
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            padding: SIZES.padding,
+          }}
+          onPress={() => {
+            setSelectedArea(item);
+            setModalVisible(false);
+          }}
+        >
+          <Image
+            source={{ uri: item.flag }}
+            style={{ width: 30, height: 30, marginRight: 5 }}
+            resizeMode="contain"
+          />
+          <Text style={{ ...FONTS.body3, marginLeft: 10 }}>
+            {item.name}
+          </Text>
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <View
+              style={{
+                height: 400,
+                backgroundColor: COLORS.lightGreen,
+                borderRadius: SIZES.radius,
+                width: SIZES.width * 0.8,
+              }}
+            >
+              <FlatList
+                data={areas}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.code}
+                showsVerticalScrollIndicator={false}
+                style={{
+                  padding: SIZES.padding * 2,
+                  marginBottom: SIZES.padding * 2,
+                }}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    );
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
@@ -259,6 +316,7 @@ const SignUp = () => {
           {renderButton()}
         </ScrollView>
       </LinearGradient>
+      {renderModal()}
     </KeyboardAvoidingView>
   );
 };
