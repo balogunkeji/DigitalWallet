@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,11 +17,36 @@ import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 
 const SignUp = () => {
-  const [showPassword,setShowPassword] = useState(false);
-  const [area, setArea] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [areas, setAreas] = useState([]);
   const [selectedArea, setSelectedArea] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  
+
+  useEffect(() => {
+    fetch("https://restcountries.eu/rest/v2/all")
+      .then((response) => response.json())
+      .then((data) => {
+        let areaData = data.map((item) => {
+          return {
+            code: item.alpha2Code,
+            name: item.name,
+            callingCode: `+${item.callingCodes[0]}`,
+            flag: `https://www.countryflags.io/${item.alpha2Code}/flat/64.png`,
+          };
+        });
+
+        setAreas(areaData);
+
+        if (areaData.length > 0) {
+          let defaultData = areaData.filter((a) => a.code == "US");
+
+          if (defaultData.length > 0) {
+            setSelectedArea(defaultData[0]);
+          }
+        }
+      });
+  }, []);
+
   const [fontsLoaded] = useFonts(FONTS);
   console.log(fontsLoaded);
   function renderHeader() {
