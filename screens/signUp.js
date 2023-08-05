@@ -18,6 +18,10 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 
 const SignUp = () => {
   const [showPassword,setShowPassword] = useState(false);
+  const [area, setArea] = useState([]);
+  const [selectedArea, setSelectedArea] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  
   const [fontsLoaded] = useFonts(FONTS);
   console.log(fontsLoaded);
   function renderHeader() {
