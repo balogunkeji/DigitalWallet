@@ -111,9 +111,8 @@ const SignUp = () => {
               color: COLORS.white,
               marginVertical: SIZES.padding,
               borderBottomColor: COLORS.white,
-              borderWidth: 1,
+              borderBottomWidth: 1,
               height: 40,
-              borderColor: "transparent",
               ...FONTS.body3,
             }}
             placeholder="Enter Full Name"
@@ -136,8 +135,7 @@ const SignUp = () => {
                 height: 50,
                 marginHorizontal: 5,
                 borderBottomColor: COLORS.white,
-                borderWidth: 1,
-                borderColor: "transparent",
+                borderBottomWidth: 1,
                 flexDirection: "row",
               }}
               onPress={() => setModalVisible(true)}
@@ -167,10 +165,9 @@ const SignUp = () => {
                 color: COLORS.white,
                 marginVertical: SIZES.padding,
                 borderBottomColor: COLORS.white,
-                borderWidth: 1,
+                borderBottomWidth: 1,
                 height: 40,
                 flex: 1,
-                borderColor: "transparent",
                 ...FONTS.body3,
               }}
               placeholder="Enter Phone Number"
@@ -191,10 +188,11 @@ const SignUp = () => {
             style={{
               color: COLORS.white,
               marginVertical: SIZES.padding,
+              outlineStyle: 'none',
               borderBottomColor: COLORS.white,
-              borderWidth: 1,
+              borderBottomWidth: 1,
               height: 40,
-              borderColor: "transparent",
+              outline: "none",
               ...FONTS.body3,
             }}
             placeholder="Enter Password"
