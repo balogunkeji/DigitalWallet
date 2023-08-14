@@ -16,14 +16,16 @@ const Tabs = () => {
     <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
-        style: {
+      }}
+      tabBarStyle={{
+        
           position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
           backgroundColor: "transparent",
           elevation: 0,
-        },
+      
       }}
     >
       <Tab.Screen
