@@ -16,7 +16,7 @@ import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [areas, setAreas] = useState([]);
   const [selectedArea, setSelectedArea] = useState(null);
@@ -232,7 +232,7 @@ const SignUp = () => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => console.log("Navigation to Home")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={{ color: COLORS.white, ...FONTS.h3, marginLeft: 15 }}>
             Continue

@@ -1,6 +1,7 @@
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SignUp } from "./screens";
+import Tabs from "./navigation/tab";
 
 const theme = {
   ...DefaultTheme,
@@ -18,6 +19,7 @@ export default function App() {
         initialRouteName="SignUp"
       >
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Home" component={Tabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
