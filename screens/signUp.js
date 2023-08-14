@@ -131,7 +131,7 @@ const SignUp = () => {
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
               style={{
-                width: 100,
+                width: 115,
                 height: 50,
                 marginHorizontal: 5,
                 borderBottomColor: COLORS.white,
