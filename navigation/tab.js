@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { BlurView } from 'expo-blur';
 import {
   createBottomTabNavigator,
   BottomTabBar,
@@ -14,18 +15,11 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator
-      tabBarOptions={{
+      screenOptions={{
         showLabel: false,
-      }}
-      tabBarStyle={{
-        
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "red",
-          elevation: 0,
-      
+        tabBarBackground: () => (
+          <BlurView tint="light" intensity={100} />
+        ),
       }}
     >
       <Tab.Screen
