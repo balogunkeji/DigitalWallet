@@ -23,7 +23,7 @@ const Tabs = () => {
           bottom: 0,
           left: 0,
           right: 0,
-          backgroundColor: "transparent",
+          backgroundColor: "red",
           elevation: 0,
       
       }}
