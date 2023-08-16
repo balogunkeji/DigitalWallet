@@ -17,9 +17,14 @@ const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         showLabel: false,
-        tabBarBackground: () => (
-          <BlurView tint="light" intensity={100} />
-        ),
+        tabBarStyle:{
+          position: 'absolute',
+          elevation: 0,
+          backgroundColor: 'transparent',
+          bottom: 0,
+          right: 0,
+          left: 0,
+        },
       }}
     >
       <Tab.Screen
